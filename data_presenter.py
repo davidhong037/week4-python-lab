@@ -21,14 +21,34 @@ data = open('CupcakeInvoices.csv')
 #     total += (int(line[3]) * (float(line[4])))
 #     rounded = round(total, 2)
 #     print(rounded)
+total_c = 0
+total_v = 0
+total_s = 0
 
-# data.close()
+for row in data:
+    line = row.rstrip('\n').split(',')
+    
+    for value in line:
+        if value == 'Strawberry':
+            total_s += (int(line[3]) * (float(line[4])))
+            rounded_s = round(total_s, 2)
+        elif value == 'Vanilla':
+            total_v += (int(line[3]) * (float(line[4])))
+            rounded_v = round(total_v, 2)
+        elif value == 'Chocolate':
+            total_c += (int(line[3]) * (float(line[4])))
+            rounded_c = round(total_c, 2)
+
+print(rounded_s, rounded_v, rounded_c)
+            
+
+data.close()
 
 
 from matplotlib import pyplot as plt
 
-x_values = [1, 2, 3, 4]
-y_values = [5, 4, 6, 2]
+x_values = ['Chocolate', 'Vanilla', 'Strawberry']
+y_values = [rounded_c, rounded_v, rounded_s]
 
 plt.bar(x_values, y_values)
 plt.show()
